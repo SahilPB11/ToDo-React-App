@@ -6,9 +6,9 @@ body {
   color: #aaa;
 }
 
-main{
-    max-width: 300px;
-    margin: 20px auto;
+main {
+  max-width: 300px;
+  margin: 20px auto;
 }
 
 form {
@@ -16,7 +16,6 @@ form {
   border-radius: 10px;
   padding: 5px;
   display: flex;
- 
 }
 
 form input[type="text"] {
@@ -31,7 +30,20 @@ form input[type="text"] {
 form button {
   background-color: #61dafb;
   border: 0;
-  border-radius: 4px ;
+  border-radius: 4px;
   cursor: pointer;
   margin: 0 5px 0 0;
+}
+
+div.task {
+  background-color: #303130;
+  border-radius: 10px;
+  padding: 5px 9px;
+  margin-top: 5px;
+  display: flex;
+}
+
+div.task svg {
+  height: 20px;
+  margin-right: 4px;
 }

@@ -7,6 +7,9 @@ function App() {
     <main>
       <TaskForm />
       <Task />
+      <Task />
+      <Task />
+      <Task />
     </main>
   );
 }

@@ -1,9 +1,10 @@
 import React from "react";
+import ChexkBox from "./ChexkBox";
 
 const Task = () => {
   return (
-    <div>
-      <input type="checkbox" />
+    <div className="task">
+      <ChexkBox defaultChecked={true} />
       test task
     </div>
   );
