@@ -1,11 +1,11 @@
 import React from "react";
 import ChexkBox from "./ChexkBox";
 
-const Task = () => {
+const Task = ({name,done}) => {
   return (
     <div className="task">
-      <ChexkBox defaultChecked={true} />
-      test task
+      <ChexkBox defaultChecked={done} />
+      {name}
     </div>
   );
 };
