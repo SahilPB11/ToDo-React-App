@@ -12,7 +12,7 @@ const Task = ({ name, done, onToggle, onTrash, onRename }) => {
         </div>
       )}
       {edit && (
-        <form>
+        <form onSubmit={e => {e.preventDefault(); setEdit(!edit)}}>
           <input
             type="text"
             value={name}

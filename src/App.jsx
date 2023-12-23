@@ -30,7 +30,7 @@ function App() {
     });
   }
 
-  // here we are check or uncheck the task 
+  // here we are check or uncheck the task
   function updateTaskDone(taskIndex, newDone) {
     setTasks((prev) => {
       const newTasks = [...prev];
@@ -39,23 +39,32 @@ function App() {
     });
   }
 
-  // this is for removing the task 
-  function removeTask(taskIndex){
-    setTasks(prev => {
-      return prev.filter((taskObj, index) => index !== taskIndex)
-    })
+  // this is for removing the task
+  function removeTask(taskIndex) {
+    setTasks((prev) => {
+      return prev.filter((taskObj, index) => index !== taskIndex);
+    });
+  }
+
+  // this function for remane the task
+  function renameTask(index, newName) {
+    setTasks((prev) => {
+      const newTasks = [...prev];
+      newTasks[index].name = newName;
+      return newTasks;
+    });
   }
 
   // here we will find how many tasks has been completed .
-  const completeTaskCount = tasks.filter((t) => t.done).length ;
+  const completeTaskCount = tasks.filter((t) => t.done).length;
   const numberTotal = tasks.length;
   function getMessage() {
-    const percentage = completeTaskCount / numberTotal * 100;
+    const percentage = (completeTaskCount / numberTotal) * 100;
     if (percentage === 0) {
       return "Try to do at least one 🙏🏻";
     }
-    if(percentage === 100){
-      return "Nice job for today! 🤴🏻"
+    if (percentage === 100) {
+      return "Nice job for today! 🤴🏻";
     }
     return "keep it going 💪🏼";
   }
@@ -70,7 +79,12 @@ function App() {
       {Array.isArray(tasks) &&
         tasks.map((task, index) => (
           <div key={index}>
-            <Task {...task} onTrash={() => removeTask(index)} onToggle={(done) => updateTaskDone(index, done)} />
+            <Task
+              {...task}
+              onRename={(newName) => renameTask(index, newName)}
+              onTrash={() => removeTask(index)}
+              onToggle={(done) => updateTaskDone(index, done)}
+            />
           </div>
         ))}
     </main>
