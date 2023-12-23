@@ -1,10 +1,10 @@
 import React from "react";
 import ChexkBox from "./ChexkBox";
 
-const Task = ({name,done}) => {
+const Task = ({ name, done, onToggle }) => {
   return (
     <div className="task">
-      <ChexkBox defaultChecked={done} />
+      <ChexkBox checked={done} onClick={() => onToggle(!done)} />
       {name}
     </div>
   );
