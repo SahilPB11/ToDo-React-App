@@ -11,9 +11,11 @@ function App() {
   // Use the useEffect hook to save the tasks in local storage whenever they change
   useEffect(() => {
     // Check if the tasks variable is not initialized or empty
-    if (!tasks) return;
+    if (tasks.length == 0) return;
     // Convert the tasks array to a JSON string and store it in local storage
-    localStorage.setItem("task", JSON.stringify(tasks));
+    else {
+      localStorage.setItem("task", JSON.stringify(tasks));
+    }
   }, [tasks]);
 
   // Use the useEffect hook to check if there are any tasks stored in local storage and load them
@@ -86,9 +88,9 @@ function App() {
   const completeTaskCount = tasks.filter((t) => t.done).length;
   const numberTotal = tasks.length;
 
-   // Function to generate a message based on the completion percentage
+  // Function to generate a message based on the completion percentage
   function getMessage() {
-        // Calculate the percentage of completed tasks
+    // Calculate the percentage of completed tasks
     const percentage = (completeTaskCount / numberTotal) * 100;
 
     // Return a message based on the percentage
@@ -101,7 +103,7 @@ function App() {
     return "keep it going 💪🏼";
   }
 
-    // Return the JSX for the App component
+  // Return the JSX for the App component
   return (
     <main>
       <h1>
