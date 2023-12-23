@@ -37,8 +37,27 @@ function App() {
       return newTasks;
     });
   }
+
+  // here we will find how many tasks has been completed .
+  const completeTaskCount = tasks.filter((t) => t.done).length ;
+  const numberTotal = tasks.length;
+  function getMessage() {
+    const percentage = completeTaskCount / numberTotal * 100;
+    if (percentage === 0) {
+      return "Try to do at least one 🙏🏻";
+    }
+    if(percentage === 100){
+      return "Nice job for today! 🤴🏻"
+    }
+    return "keep it going 💪🏼";
+  }
   return (
     <main>
+      <h1>
+        {completeTaskCount}/{numberTotal} Complete
+      </h1>
+
+      <h2>{getMessage()}</h2>
       <TaskForm onAdd={addTask} />
       {Array.isArray(tasks) &&
         tasks.map((task, index) => (

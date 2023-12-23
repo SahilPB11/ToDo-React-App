@@ -3,9 +3,9 @@ import ChexkBox from "./ChexkBox";
 
 const Task = ({ name, done, onToggle }) => {
   return (
-    <div className="task">
+    <div className={"task " + (done ? "done" : "")}>
       <ChexkBox checked={done} onClick={() => onToggle(!done)} />
-      {name}
+      <span> {name}</span>
     </div>
   );
 };
