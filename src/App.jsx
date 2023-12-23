@@ -3,63 +3,95 @@ import "./App.css";
 import TaskForm from "./components/TaskForm";
 import Task from "./components/task";
 
+// Define the main App component
 function App() {
+  // Create a state variable to store the list of tasks
   const [tasks, setTasks] = useState([]);
-  // here i am saving the task in localstorage whenever the changes will happen
+
+  // Use the useEffect hook to save the tasks in local storage whenever they change
   useEffect(() => {
+    // Check if the tasks variable is not initialized or empty
     if (!tasks) return;
+    // Convert the tasks array to a JSON string and store it in local storage
     localStorage.setItem("task", JSON.stringify(tasks));
   }, [tasks]);
 
-  // after refreh we are checking if tasks is present in localstorage show it
+  // Use the useEffect hook to check if there are any tasks stored in local storage and load them
   useEffect(() => {
+    // Get the stored tasks from local storage and parse them back into an array
     const storedTasks = JSON.parse(localStorage.getItem("task"));
+    // If there are stored tasks, set the tasks state variable to the stored tasks
     if (storedTasks && storedTasks.length > 0) {
       setTasks(storedTasks);
     }
   }, []);
 
-  // this function for adding a new task
+  // Function to add a new task to the list
   function addTask(name) {
     setTasks((prevTasks) => {
-      // If prevTasks is not an array or is undefined, so i initilise it empty array
+      // Check if the previous tasks variable is an array, otherwise initialize it as an empty array
       const currentTasks = Array.isArray(prevTasks) ? prevTasks : [];
 
-      // And Add the new task to the current tasks array
+      // Add the new task to the array of current tasks
       return [...currentTasks, { name: name, done: false }];
     });
   }
 
-  // here we are check or uncheck the task
+  // Function to update the done status of a task
   function updateTaskDone(taskIndex, newDone) {
+    // Update the tasks state variable by updating the done status of the task at the given index
     setTasks((prev) => {
+      // Create a copy of the previous tasks array
       const newTasks = [...prev];
+      // Update the done status of the task at the given index
       newTasks[taskIndex].done = newDone;
+      // Return the updated tasks array
       return newTasks;
     });
   }
 
-  // this is for removing the task
+  // Function to remove a task from the list
   function removeTask(taskIndex) {
+    // Update the tasks state variable by filtering out the task at the given index
     setTasks((prev) => {
-      return prev.filter((taskObj, index) => index !== taskIndex);
+      // Create a copy of the previous tasks array
+      const newTasks = [...prev];
+
+      // Filter out the task at the given index
+      const filteredTasks = newTasks.filter(
+        (taskObj, index) => index !== taskIndex
+      );
+
+      // Return the filtered tasks array
+      return filteredTasks;
     });
   }
 
   // this function for remane the task
   function renameTask(index, newName) {
+    // Update the tasks state variable by updating the name of the task at the given index
     setTasks((prev) => {
+      // Create a copy of the previous tasks array
       const newTasks = [...prev];
+
+      // Update the name of the task at the given index
       newTasks[index].name = newName;
+
+      // Return the updated tasks array
       return newTasks;
     });
   }
 
-  // here we will find how many tasks has been completed .
+  // Calculate the number of completed tasks and the total number of tasks
   const completeTaskCount = tasks.filter((t) => t.done).length;
   const numberTotal = tasks.length;
+
+   // Function to generate a message based on the completion percentage
   function getMessage() {
+        // Calculate the percentage of completed tasks
     const percentage = (completeTaskCount / numberTotal) * 100;
+
+    // Return a message based on the percentage
     if (percentage === 0) {
       return "Try to do at least one 🙏🏻";
     }
@@ -68,6 +100,8 @@ function App() {
     }
     return "keep it going 💪🏼";
   }
+
+    // Return the JSX for the App component
   return (
     <main>
       <h1>
