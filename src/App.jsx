@@ -30,12 +30,20 @@ function App() {
     });
   }
 
+  // here we are check or uncheck the task 
   function updateTaskDone(taskIndex, newDone) {
     setTasks((prev) => {
       const newTasks = [...prev];
       newTasks[taskIndex].done = newDone;
       return newTasks;
     });
+  }
+
+  // this is for removing the task 
+  function removeTask(taskIndex){
+    setTasks(prev => {
+      return prev.filter((taskObj, index) => index !== taskIndex)
+    })
   }
 
   // here we will find how many tasks has been completed .
@@ -62,7 +70,7 @@ function App() {
       {Array.isArray(tasks) &&
         tasks.map((task, index) => (
           <div key={index}>
-            <Task {...task} onToggle={(done) => updateTaskDone(index, done)} />
+            <Task {...task} onTrash={() => removeTask(index)} onToggle={(done) => updateTaskDone(index, done)} />
           </div>
         ))}
     </main>
